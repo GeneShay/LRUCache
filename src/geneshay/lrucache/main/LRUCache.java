@@ -106,9 +106,9 @@ public class LRUCache {
             }
             remove(node);
             node.last = getHead().last;
-            node.next = getHead().next;
+            node.next = getHead();
             getHead().last.next = node;
-            getHead().next.last  = node;
+            getHead().last  = node;
             return node;
         }
 
@@ -116,6 +116,16 @@ public class LRUCache {
         private void remove(Node node){
             node.next.last = node.last;
             node.last.next = node.next;
+        }
+
+        public String toString(){
+            Node node = dummyHead;
+            String response = "";
+            while(!node.next.isEqualTo(dummyTail)){
+                node = node.next;
+                response += node.key + ":" + node.value + "\n";
+            }
+            return response;
         }
     }
 
